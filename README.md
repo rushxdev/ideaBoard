@@ -20,9 +20,7 @@ Please go through the below documentation thoroughly for get an understanding to
 - [Running the Application](#running-the-application)
   - [Running the Backend](#running-the-backend)
   - [Running the Frontend](#running-the-frontend)
-- [API Endpoints](#api-endpoints)
-- [Project Structure](#project-structure)
-- [Contact](#contact)
+- [Usage](#usage)
 ## Features ✅
 
 - **Create New Ideas:** Easily add new ideas with titles and descriptions.
