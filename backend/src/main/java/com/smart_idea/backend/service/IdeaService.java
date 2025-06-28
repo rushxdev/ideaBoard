@@ -24,4 +24,12 @@ public class IdeaService {
     public List<Idea> getAllIdeasSortedByCreatedAtDesc() {
         return ideaRepository.findAllByOrderByCreatedAtDesc();
     }
+
+    public Idea updateIdea(Long id, IdeaDTO ideaDTO) {
+        Idea existingIdea = ideaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Idea not found with id: " + id));
+        existingIdea.setTitle(ideaDTO.getTitle());
+        existingIdea.setDescription(ideaDTO.getDescription());
+        return ideaRepository.save(existingIdea);
+    }
 }
