@@ -93,7 +93,8 @@ function IdeaForm({ initialData, onClose, onSuccess }) {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+            className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none 
+              focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
               errors.title ? 'border-red-500' : 'border-gray-300'
             }`}
             disabled={isSubmitting}
@@ -113,7 +114,8 @@ function IdeaForm({ initialData, onClose, onSuccess }) {
             rows="5"
             value={formData.description}
             onChange={handleChange}
-            className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
+            className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none 
+              focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${
               errors.description ? 'border-red-500' : 'border-gray-300'
             }`}
             disabled={isSubmitting} 
@@ -127,14 +129,17 @@ function IdeaForm({ initialData, onClose, onSuccess }) {
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75"
+            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition 
+            duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75"
             disabled={isSubmitting}
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition 
+            duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 
+            disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={isSubmitting}
             aria-live="polite"
           >

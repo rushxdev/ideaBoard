@@ -8,12 +8,14 @@ function IdeaList({ ideas, onEditIdea, onDeleteIdea }) {
           {ideas.map((ideas) => (
             <div
               key={ideas.id}
-              className="bg-gray-50 border border-gray-200 rounded-lg p-5 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between"
+              className="bg-gray-50 border border-gray-200 rounded-lg p-5 shadow-sm hover:shadow-md 
+              transition-shadow duration-200 flex flex-col justify-between"
               role="listitem"
               aria-labelledby={`idea-title-${ideas.id}`}
             >
               <div>
-                <h3 id={`idea-title-${ideas.id}`} className="text-xl font-semibold text-gray-900 mb-2 truncate" title={ideas.title}>{ideas.title}</h3>
+                <h3 id={`idea-title-${ideas.id}`} className="text-xl font-semibold text-gray-900 mb-2 truncate" 
+                title={ideas.title}>{ideas.title}</h3>
                 <p className="text-gray-700 text-base mb-4 line-clamp-3" title={ideas.description}>{ideas.description}</p>
               </div>
               <div className="text-xs text-gray-500 mt-auto pt-3 border-t border-gray-200">
@@ -22,14 +24,18 @@ function IdeaList({ ideas, onEditIdea, onDeleteIdea }) {
               <div className="mt-4 flex justify-end space-x-2">
                 <button
                   onClick={() => onEditIdea(ideas)}
-                  className="px-3 py-1 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+                  className="px-3 py-1 bg-blue-500 text-white rounded-md text-sm 
+                  hover:bg-blue-600 transition duration-150 ease-in-out focus:outline-none 
+                  focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
                   aria-label={`Edit idea ${ideas.title}`}
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => onDeleteIdea(ideas.id)}
-                  className="px-3 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75"
+                  className="px-3 py-1 bg-red-500 text-white rounded-md text-sm 
+                  hover:bg-red-600 transition duration-150 ease-in-out focus:outline-none 
+                  focus:ring-2 focus:ring-red-500 focus:ring-opacity-75"
                   aria-label={`Delete idea ${ideas.title}`}
                 >
                   Delete

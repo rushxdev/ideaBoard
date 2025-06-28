@@ -12,15 +12,17 @@ function Modal({ isOpen, onClose, children }) {
       role="dialog"
     >
       <div
-        className="bg-white rounded-lg shadow-xl relative max-h-[90vh] overflow-y-auto w-full max-w-lg mx-auto transform transition-all duration-300 sm:max-w-lg sm:rounded-lg sm:shadow-xl
-                   scale-100 opacity-100 sm:scale-100 sm:opacity-100"
+        className="bg-white rounded-lg shadow-xl relative max-h-[90vh] overflow-y-auto w-full max-w-lg mx-auto 
+        transform transition-all duration-300 sm:max-w-lg sm:rounded-lg sm:shadow-xl
+        scale-100 opacity-100 sm:scale-100 sm:opacity-100"
         
         onClick={(e) => e.stopPropagation()}
       >
         
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl font-bold p-1 leading-none rounded-full focus:outline-none focus:ring-2 focus:ring-gray-300"
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl 
+          font-bold p-1 leading-none rounded-full focus:outline-none focus:ring-2 focus:ring-gray-300"
           aria-label="Close modal"
         >
           &times;
