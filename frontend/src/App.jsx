@@ -4,13 +4,24 @@ import IdeaForm from './components/IdeaForm.jsx';
 import IdeaList from './components/IdeaList.jsx';
 import Modal from './components/Modal.jsx';
 import AddIcon from '@mui/icons-material/Add';
+import NotificationSnackbar from './components/NotificationSnackbar.jsx'
+import ConfirmDialog from './components/ConfirmDialog.jsx';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentIdea, setCurrentIdea] = useState(null); 
-  const [Idea, setIdeas] = useState([]);
+  const [idea, setIdeas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [notification, setNotification] = useState({
+    open: false,
+    message: '',
+    severity: 'success',
+  });
+
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [ideaToDelete, setIdeaToDelete] = useState(null);
 
   const fetchIdeas = useCallback(async () => {
     setLoading(true);
@@ -41,34 +52,58 @@ function App() {
     setIsModalOpen(true);
   };
 
-  const handleDeleteIdea = async (id) => {
-
-    if (window.confirm('Are you sure you want to delete this idea?')) {
-      try {
-        await axios.delete(`http://localhost:8080/api/ideas/${id}`);
-        fetchIdeas(); 
-        alert('Note deleted successfully!'); 
-      } catch (err) {
-        console.error('Error deleting note:', err);
-        
-        if (err.response && err.response.status === 404) {
-          alert('Idea not found. It might have already been deleted.');
-        } else {
-          alert('Failed to delete the idea. Please try again.');
-        }
-      }
-    }
+  const initiateDelete = (id) => {
+    setIdeaToDelete(id);
+    setIsConfirmOpen(true);
   };
 
-  
-  const handleFormSuccess = () => {
+  const handleDeleteIdeaConfirm = async () => {
+    setIsConfirmOpen(false)
+    if (!ideaToDelete) return;
+
+    try {
+        await axios.delete(`http://localhost:8080/api/ideas/${ideaToDelete}`);
+        fetchIdeas();
+        setNotification({
+          open: true,
+          message: 'Idea deleted successfully!',
+          severity: 'success',
+        });
+        } catch (err) {
+            console.error('Error deleting note:', err);
+            let errorMessage = 'Failed to delete the idea. Please try again.';
+            if (err.response && err.response.status === 404) {
+                errorMessage = 'Idea not found. It might have already been deleted.';
+            } else if(err.response) {
+                errorMessage = `Error: ${err.response.data.message || err.response.status}`;
+            }
+            setNotification({
+            open: true,
+            message: errorMessage,
+            severity: 'error',
+            });
+        }   finally {
+            setIdeaToDelete(null)
+        }
+    };
+ 
+  const handleFormSuccess = (message) => {
     setIsModalOpen(false); 
     setCurrentIdea(null);  
-    fetchIdeas();          
+    fetchIdeas();
+    setNotification({
+      open: true,
+      message: message,
+      severity: 'success',
+    });          
+  };
+
+  const handleCloseNotification = () => {
+    setNotification({ ...notification, open: false });
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-grey-100"> 
+    <div className="flex flex-col min-h-screen bg-gray-50"> 
       <div className="container mx-auto p-4 md:p-8 flex-grow">
         <h1 className="text-6xl font-extrabold text-center text-gray-800 mb-2 tracking-tight">
           Smart <span className='text-amber-500'>Idea</span>
@@ -82,7 +117,8 @@ function App() {
             onClick={handleAddIdeaClick}
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 
             px-6 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105 
-            focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75"
+            focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75
+            flex items-center space-x-2"
             aria-label="New Idea"
           >
             <AddIcon fontSize='small'/>
@@ -98,9 +134,9 @@ function App() {
 
         {!loading && !error && (
           <IdeaList
-            ideas={Idea}
+            ideas={idea}
             onEditIdea={handleEditIdea}
-            onDeleteIdea={handleDeleteIdea}
+            onDeleteIdea={initiateDelete}
           />
         )}
 
@@ -112,6 +148,21 @@ function App() {
             onSuccess={handleFormSuccess}
           />
         </Modal>
+
+        <ConfirmDialog
+          isOpen={isConfirmOpen}
+          onClose={() => setIsConfirmOpen(false)}
+          onConfirm={handleDeleteIdeaConfirm}
+          title="Delete Idea"
+          message="Are you sure you want to delete this idea? This action cannot be undone."
+        />
+
+        <NotificationSnackbar
+          open={notification.open}
+          message={notification.message}
+          severity={notification.severity}
+          onClose={handleCloseNotification}
+        />
       </div>
     </div>
   );

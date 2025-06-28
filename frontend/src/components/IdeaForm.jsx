@@ -40,23 +40,28 @@ function IdeaForm({ initialData, onClose, onSuccess }) {
     setSubmissionMessage(''); 
     setIsSubmitting(true); 
 
+    let successMsg = '';
+    let isNewIdea = false;
+
     try {
       let response;
       
       if (initialData && initialData.id) {
         response = await axios.put(`http://localhost:8080/api/ideas/${initialData.id}`, formData);
-        setSubmissionMessage('Idea updated successfully!');
+        successMsg= 'Idea updated successfully!';
       } else {
         response = await axios.post('http://localhost:8080/api/ideas', formData);
-        setSubmissionMessage('Idea added successfully!');
+        successMsg = 'Idea added successfully!';
+        isNewIdea = true
+
       }
       console.log('Success:', response.data);
-      onSuccess();
+      onSuccess(successMsg, isNewIdea);
     } catch (error) {
       if (error.response) {
         if (error.response.status === 400) { 
           setErrors(error.response.data);
-          setSubmissionMessage('Title or Description Cannot be Empty.');
+          setSubmissionMessage('Title and Description required.');
           console.error('Validation Errors:', error.response.data);
         } else if (error.response.status === 404) {
           setSubmissionMessage('The idea was not found or has been deleted.');

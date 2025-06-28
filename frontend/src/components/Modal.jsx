@@ -6,7 +6,7 @@ function Modal({ isOpen, onClose, children }) {
 
   return ReactDOM.createPortal(
     <div
-      className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4 sm:p-6 md:p-8"
+      className="fixed inset-0 backdrop-blur-lg flex items-center justify-center z-50 p-4 sm:p-6 md:p-8"
       onClick={onClose}
       aria-modal="true"
       role="dialog"
