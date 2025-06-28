@@ -58,5 +58,9 @@ public class IdeaController {
         return new ResponseEntity<>(updatedIdea, HttpStatus.OK);
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteIdea(@PathVariable Long id) {
+        ideaService.deleteIdea(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

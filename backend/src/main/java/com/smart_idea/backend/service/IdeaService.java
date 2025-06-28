@@ -32,4 +32,11 @@ public class IdeaService {
         existingIdea.setDescription(ideaDTO.getDescription());
         return ideaRepository.save(existingIdea);
     }
+
+    public void deleteIdea(Long id) {
+        if(!ideaRepository.existsById(id)) {
+            throw new RuntimeException("Idea not found with id: " + id);
+        }
+        ideaRepository.deleteById(id);
+    }
 }
