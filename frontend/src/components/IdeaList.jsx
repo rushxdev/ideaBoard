@@ -24,8 +24,8 @@ function IdeaList({ ideas, onEditIdea, onDeleteIdea }) {
               <div className="mt-4 flex justify-end space-x-2">
                 <button
                   onClick={() => onEditIdea(ideas)}
-                  className="px-3 py-1 bg-blue-500 text-white rounded-md text-sm 
-                  hover:bg-blue-600 transition duration-150 ease-in-out focus:outline-none 
+                  className="px-3 py-1 border-2 border-gray-600 text-black rounded-md text-sm 
+                  hover:bg-gray-600 hover:text-white transition duration-150 ease-in-out focus:outline-none 
                   focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
                   aria-label={`Edit idea ${ideas.title}`}
                 >
@@ -33,8 +33,8 @@ function IdeaList({ ideas, onEditIdea, onDeleteIdea }) {
                 </button>
                 <button
                   onClick={() => onDeleteIdea(ideas.id)}
-                  className="px-3 py-1 bg-red-500 text-white rounded-md text-sm 
-                  hover:bg-red-600 transition duration-150 ease-in-out focus:outline-none 
+                  className="px-3 py-1 border-2 border-red-600 text-red-800 rounded-md text-sm 
+                  hover:bg-red-600 hover:text-white transition duration-150 ease-in-out focus:outline-none 
                   focus:ring-2 focus:ring-red-500 focus:ring-opacity-75"
                   aria-label={`Delete idea ${ideas.title}`}
                 >
