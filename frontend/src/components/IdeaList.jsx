@@ -1,6 +1,6 @@
 function IdeaList({ ideas, onEditIdea, onDeleteIdea }) {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto">
+    <div className="bg-white p-6 rounded-lg shadow-md max-w-8xl mx-auto">
       {ideas.length === 0 ? (
         <p className="text-center text-gray-600 py-8 text-lg">No Ideas available. Click "New Idea" to create one!</p>
       ) : (
@@ -24,7 +24,7 @@ function IdeaList({ ideas, onEditIdea, onDeleteIdea }) {
               <div className="mt-4 flex justify-end space-x-2">
                 <button
                   onClick={() => onEditIdea(ideas)}
-                  className="px-3 py-1 border-2 border-gray-600 text-black rounded-md text-sm 
+                  className="px-3 py-1 border border-gray-600 text-black font-medium rounded-md text-sm 
                   hover:bg-gray-600 hover:text-white transition duration-150 ease-in-out focus:outline-none 
                   focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
                   aria-label={`Edit idea ${ideas.title}`}
@@ -33,8 +33,8 @@ function IdeaList({ ideas, onEditIdea, onDeleteIdea }) {
                 </button>
                 <button
                   onClick={() => onDeleteIdea(ideas.id)}
-                  className="px-3 py-1 border-2 border-red-600 text-red-800 rounded-md text-sm 
-                  hover:bg-red-600 hover:text-white transition duration-150 ease-in-out focus:outline-none 
+                  className="px-3 py-1 border-2 bg-red-500 text-white rounded-md text-sm 
+                  hover:bg-red-600 hover:border-red-600 hover:text-white transition duration-150 ease-in-out focus:outline-none 
                   focus:ring-2 focus:ring-red-500 focus:ring-opacity-75"
                   aria-label={`Delete idea ${ideas.title}`}
                 >
