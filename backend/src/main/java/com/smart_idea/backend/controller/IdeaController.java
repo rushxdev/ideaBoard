@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -36,8 +37,30 @@ public class IdeaController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Idea>> getAllIdeas() {
-        Iterable<Idea> ideas = ideaService.getAllIdeas();
+    public ResponseEntity<List<Idea>> getAllIdeas() {
+        List<Idea> ideas = ideaService.getAllIdeasSortedByCreatedAtDesc();
         return new ResponseEntity<>(ideas, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Idea> updateIdea(@PathVariable Long id,
+                                           @Valid @RequestBody IdeaDTO ideaDTO,
+                                           BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for(FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Idea updatedIdea = ideaService.updateIdea(id, ideaDTO);
+        return new ResponseEntity<>(updatedIdea, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteIdea(@PathVariable Long id) {
+        ideaService.deleteIdea(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
