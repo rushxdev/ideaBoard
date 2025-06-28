@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -36,8 +37,8 @@ public class IdeaController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Idea>> getAllIdeas() {
-        Iterable<Idea> ideas = ideaService.getAllIdeas();
+    public ResponseEntity<List<Idea>> getAllIdeas() {
+        List<Idea> ideas = ideaService.getAllIdeasSortedByCreatedAtDesc();
         return new ResponseEntity<>(ideas, HttpStatus.OK);
     }
 }

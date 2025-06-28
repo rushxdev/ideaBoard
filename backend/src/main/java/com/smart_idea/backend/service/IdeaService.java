@@ -10,12 +10,9 @@ import java.util.List;
 
 @Service
 public class IdeaService {
-    private IdeaRepository ideaRepository;
 
     @Autowired
-    public IdeaService(IdeaRepository ideaRepository) {
-        this.ideaRepository = ideaRepository;
-    }
+    private IdeaRepository ideaRepository;
 
     public Idea saveIdea(IdeaDTO noteDto){
         Idea idea = new Idea();
@@ -24,7 +21,7 @@ public class IdeaService {
         return ideaRepository.save(idea);
     }
 
-    public Iterable<Idea> getAllIdeas() {
-        return ideaRepository.findAll();
+    public List<Idea> getAllIdeasSortedByCreatedAtDesc() {
+        return ideaRepository.findAllByOrderByCreatedAtDesc();
     }
 }
