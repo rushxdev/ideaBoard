@@ -7,6 +7,8 @@ import AddIcon from '@mui/icons-material/Add';
 import NotificationSnackbar from './components/NotificationSnackbar.jsx'
 import ConfirmDialog from './components/ConfirmDialog.jsx';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentIdea, setCurrentIdea] = useState(null); 
@@ -27,7 +29,7 @@ function App() {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get('http://localhost:8080/api/ideas');
+      const response = await axios.get(`${API_BASE_URL}/ideas`);
       setIdeas(response.data);
     } catch (err) {
       console.error('Error fetching ideas:', err);
@@ -62,7 +64,7 @@ function App() {
     if (!ideaToDelete) return;
 
     try {
-        await axios.delete(`http://localhost:8080/api/ideas/${ideaToDelete}`);
+        await axios.delete(`${API_BASE_URL}/ideas/${ideaToDelete}`);
         fetchIdeas();
         setNotification({
           open: true,

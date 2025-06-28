@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 function IdeaForm({ initialData, onClose, onSuccess }) {
   
   const [formData, setFormData] = useState({
@@ -47,10 +49,10 @@ function IdeaForm({ initialData, onClose, onSuccess }) {
       let response;
       
       if (initialData && initialData.id) {
-        response = await axios.put(`http://localhost:8080/api/ideas/${initialData.id}`, formData);
+        response = await axios.put(`${API_BASE_URL}/ideas/${initialData.id}`, formData);
         successMsg= 'Idea updated successfully!';
       } else {
-        response = await axios.post('http://localhost:8080/api/ideas', formData);
+        response = await axios.post(`${API_BASE_URL}/ideas`, formData);
         successMsg = 'Idea added successfully!';
         isNewIdea = true
 
